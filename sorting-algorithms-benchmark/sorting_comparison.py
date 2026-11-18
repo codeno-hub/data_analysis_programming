@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-"""sorting_comparison
-"""
-
 """Sorting Algorithms Performance Comparison
 
 Implements Selection, Bubble, Insertion, Merge and Quick sort and compares
@@ -248,9 +244,59 @@ def print_summary(results, sizes):
     print()
 
 
+def plot_results(results, sizes, filename="sorting_chart.png"):
+    """Save a 2x2 chart (one panel per input type). Needs matplotlib;
+    if it is not installed the program still runs, just without the chart."""
+    try:
+        import matplotlib
+        matplotlib.use("Agg")            # no window needed, just save a file
+        import matplotlib.pyplot as plt
+    except ImportError:
+        print("matplotlib not installed - skipping chart "
+              "(install it with: pip install matplotlib)")
+        return
+
+    styles = {
+        "Selection": ("#d95f02", "s"),
+        "Bubble": ("#e7298a", "^"),
+        "Insertion": ("#7570b3", "D"),
+        "Merge": ("#1b9e77", "o"),
+        "Quick": ("#1f78b4", "v"),
+    }
+
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8), sharex=True)
+    for ax, scenario in zip(axes.flat, SCENARIOS):
+        for name, (color, marker) in styles.items():
+            xs, ys = [], []
+            for n in sizes:
+                v = results[(scenario, n)][name]
+                if v is not None:
+                    xs.append(n)
+                    ys.append(max(v * 1000, 0.001))   # ms; avoid log(0)
+            ax.plot(xs, ys, marker=marker, color=color, label=name, linewidth=1.8)
+        ax.set_title(f"{scenario} input")
+        ax.set_xscale("log")
+        ax.set_yscale("log")
+        ax.grid(True, which="both", alpha=0.25)
+    for ax in axes[1]:
+        ax.set_xlabel("Number of elements (n)")
+    for ax in axes[:, 0]:
+        ax.set_ylabel("Time in ms (lower is better)")
+
+    handles, labels = axes[0][0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=5, frameon=False)
+    fig.suptitle("Sorting algorithm running time vs input size (log-log scale)",
+                 fontsize=14)
+    fig.tight_layout(rect=(0, 0.05, 1, 0.96))
+    fig.savefig(filename, dpi=150)
+    plt.close(fig)
+    print(f"Chart saved to {filename}")
+
+
 if __name__ == "__main__":
     SIZES = [100, 500, 1000, 2000, 5000, 20000]
     verify()
     res = run_benchmark(SIZES)
     print_report(res, SIZES)
     print_summary(res, SIZES)
+    plot_results(res, SIZES)
