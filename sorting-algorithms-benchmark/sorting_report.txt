@@ -2,6 +2,7 @@ SORTING ALGORITHMS PERFORMANCE COMPARISON
 =========================================
 
 Program file: sorting_comparison.py (run with: python sorting_comparison.py)
+Chart file:   sorting_chart.png (created by the program when matplotlib is installed)
 
 
 1. AIM
@@ -38,79 +39,84 @@ reversed input do not cause worst-case behaviour or deep recursion.
   they would take too long (shown as "--").
 
 
-4. RESULTS (time in milliseconds)
----------------------------------
+4. RESULTS (time in milliseconds, from my own run)
+--------------------------------------------------
 
 Random input
        n |  Selection |     Bubble |  Insertion |      Merge |      Quick
-     100 |       0.12 |       0.19 |       0.10 |       0.07 |       0.04
-     500 |       2.67 |       5.47 |       2.77 |       0.43 |       0.29
-    1000 |      11.00 |      24.59 |      12.06 |       0.94 |       0.61
-    2000 |      44.52 |     105.05 |      50.20 |       2.07 |       1.34
-    5000 |     275.24 |     672.84 |     321.21 |       5.77 |       3.67
-   20000 |         -- |         -- |         -- |      27.88 |      16.70
+     100 |       0.12 |       0.23 |       0.10 |       0.10 |       0.04
+     500 |       3.23 |       5.95 |       2.56 |       0.49 |       0.26
+    1000 |      11.15 |      23.74 |      11.91 |       1.02 |       0.62
+    2000 |      47.84 |     123.62 |      52.37 |       2.32 |       1.42
+    5000 |     302.53 |    1285.64 |     591.61 |       9.61 |       3.72
+   20000 |         -- |         -- |         -- |      62.30 |      24.19
 
 Sorted input
        n |  Selection |     Bubble |  Insertion |      Merge |      Quick
-     100 |       0.10 |       0.00 |       0.00 |       0.05 |       0.03
-     500 |       2.53 |       0.01 |       0.02 |       0.30 |       0.16
-    1000 |      10.61 |       0.03 |       0.05 |       0.64 |       0.35
-    2000 |      42.61 |       0.06 |       0.11 |       1.41 |       0.73
-    5000 |     267.60 |       0.15 |       0.26 |       3.87 |       2.15
-   20000 |         -- |         -- |         -- |      17.17 |       9.55
+     100 |       0.10 |       0.00 |       0.01 |       0.12 |       0.07
+     500 |       3.30 |       0.03 |       0.05 |       0.34 |       0.15
+    1000 |      21.20 |       0.06 |       0.12 |       1.54 |       0.63
+    2000 |      87.67 |       0.12 |       0.23 |       3.06 |       0.87
+    5000 |     551.67 |       0.32 |       0.59 |       8.66 |       3.78
+   20000 |         -- |         -- |         -- |      35.87 |      11.43
 
 Reversed input
        n |  Selection |     Bubble |  Insertion |      Merge |      Quick
-     100 |       0.10 |       0.24 |       0.22 |       0.07 |       0.03
-     500 |       2.76 |       6.66 |       5.37 |       0.31 |       0.17
-    1000 |      11.42 |      30.09 |      22.96 |       0.69 |       0.37
-    2000 |      46.71 |     127.18 |      95.99 |       1.40 |       0.79
-    5000 |     295.83 |     828.79 |     612.79 |       3.99 |       2.24
-   20000 |         -- |         -- |         -- |      17.93 |      10.11
+     100 |       0.36 |       0.74 |       0.19 |       0.06 |       0.03
+     500 |       3.83 |      14.44 |      10.07 |       0.71 |       0.31
+    1000 |      23.96 |      57.58 |      32.77 |       1.71 |       0.68
+    2000 |      96.43 |     244.04 |     182.40 |       2.82 |       1.17
+    5000 |     594.23 |    1695.36 |    1193.51 |       7.45 |       4.04
+   20000 |         -- |         -- |         -- |      36.68 |      23.90
 
 Nearly sorted input
        n |  Selection |     Bubble |  Insertion |      Merge |      Quick
-     100 |       0.09 |       0.07 |       0.01 |       0.07 |       0.03
-     500 |       2.53 |       2.03 |       0.09 |       0.34 |       0.16
-    1000 |      10.30 |      13.46 |       0.63 |       0.80 |       0.36
-    2000 |      42.04 |      60.11 |       2.32 |       1.76 |       0.86
-    5000 |     265.21 |     385.39 |      17.25 |       4.92 |       2.21
-   20000 |         -- |         -- |         -- |      23.70 |      15.19
+     100 |       0.21 |       0.18 |       0.02 |       0.15 |       0.07
+     500 |       3.24 |       2.61 |       0.31 |       0.79 |       0.31
+    1000 |      21.30 |      29.78 |       1.14 |       1.84 |       0.69
+    2000 |      88.75 |     113.55 |       3.58 |       2.64 |       0.81
+    5000 |     556.68 |     761.51 |      33.19 |       9.68 |       3.42
+   20000 |         -- |         -- |         -- |      54.84 |      17.27
 
 Relative speed on random data, n = 5000 (1.0x = fastest)
   Quick           1.0x
-  Merge           1.6x
-  Selection      75.1x
-  Insertion      87.6x
-  Bubble        183.5x
+  Merge           2.6x
+  Selection      81.4x
+  Insertion     159.2x
+  Bubble        345.9x
 
-Note: exact timings depend on the computer and will differ when the program
-is run again. The ranking and the growth trends stay the same.
+Note: exact timings depend on the computer and on what else it is running,
+so they will differ slightly each time the program is run. The ranking and
+the growth trends stay the same.
 
 
 5. ANALYSIS
 -----------
 1. Merge Sort and Quick Sort are far faster than the other three on random
    data. They are O(n log n), while Selection, Bubble and Insertion are
-   O(n^2). At n = 5000 on random data, Quick Sort was about 75x faster than
-   Selection Sort and about 184x faster than Bubble Sort.
+   O(n^2). At n = 5000 on random data, Quick Sort was about 81x faster than
+   Selection Sort and about 346x faster than Bubble Sort.
 
 2. The quadratic sorts grow quickly. Going from n = 1000 to n = 2000 (double
-   the size) roughly quadrupled their time, for example Selection Sort went
-   from 11.00 ms to 44.52 ms. Merge and Quick Sort roughly doubled.
+   the size) roughly quadrupled their time on random data, for example
+   Selection Sort went from 11.15 ms to 47.84 ms and Bubble Sort from
+   23.74 ms to 123.62 ms. Merge and Quick Sort only roughly doubled.
 
-3. Quick Sort was slightly faster than Merge Sort in these tests (about 1.6x
-   on random data). It sorts in place, while Merge Sort creates and copies
-   many sublists.
+3. Quick Sort was faster than Merge Sort in these tests (about 2.6x on
+   random data at n = 5000). It sorts in place, while Merge Sort creates and
+   copies many sublists.
 
 4. Input order matters for some algorithms:
    - Bubble and Insertion Sort are very fast on already sorted input (under
-     0.3 ms at n = 5000) because they do almost no work (O(n)).
+     1 ms at n = 5000) because they do almost no work (O(n)).
    - Insertion Sort is the best of the simple sorts on nearly sorted data
-     (17.25 ms at n = 5000 vs 385 ms for Bubble and 265 ms for Selection).
-   - Selection Sort takes about the same time for every input type, because
-     it always scans the whole unsorted part to find the minimum.
-   - Reversed input is the worst case for Bubble and Insertion Sort.
+     (33.19 ms at n = 5000 vs 761.51 ms for Bubble and 556.68 ms for
+     Selection).
+   - Selection Sort has no fast case. It always scans the whole unsorted
+     part to find the minimum, so it stays in the hundreds of milliseconds
+     at n = 5000 for every input type (302 to 594 ms).
+   - Reversed input is the worst case for Bubble and Insertion Sort
+     (1695.36 ms and 1193.51 ms at n = 5000).
 
 5. Bubble Sort was the slowest on random and reversed input because it
    performs the most element swaps.
